@@ -92,7 +92,7 @@ app.get("/users", async (req, res) => {
   }
 });
 //get one users
-app.get("allusers", async (req, res) => {
+app.get("/allusers", async (req, res) => {
   const email = "tin@test.com";
   try {
     const users = await pool.query(`SELECT * FROM users `);
