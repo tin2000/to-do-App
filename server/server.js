@@ -4,7 +4,6 @@ const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 const app = express();
 const pool = require("./db");
-const home = require("./routes/home");
 //bcrypt mã hóa password và tăng độ bảo mật
 const bcrypt = require("bcrypt");
 //sử jsonwebtoken để đảm bảo tính toàn vẹn dữ liệu
@@ -12,7 +11,7 @@ const jwt = require("jsonwebtoken");
 //Simple Usage (Enable All CORS Requests)
 app.use(cors());
 app.use(express.json());
-app.use("/home", home);
+
 //get all todos
 app.get("/todos/:userEmail", async (req, res) => {
   //req.params là lấy tham số trên thanh url
