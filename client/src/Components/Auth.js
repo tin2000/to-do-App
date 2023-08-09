@@ -22,7 +22,7 @@ const Auth = () => {
       setEmail(data[0].email);
       setPassword("123");
     };
-    console.log("hello");
+
     getLogin();
   }, []);
 
