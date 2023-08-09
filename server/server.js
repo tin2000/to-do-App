@@ -1,5 +1,5 @@
 //toán tử ?? sẽ trả về giá trị đầu tiên nếu nó k là null undefine
-const port = process.env.PORT || 8000;
+
 const express = require("express");
 const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
@@ -146,4 +146,4 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Server running on PORT ${port}`));
+app.listen(process.env.PORT, () => console.log(`Server running on PORT `));
