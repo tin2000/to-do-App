@@ -91,6 +91,17 @@ app.get("/users", async (req, res) => {
     console.error(err);
   }
 });
+//get one users
+app.get("allusers", async (req, res) => {
+  const email = "tin@test.com";
+  try {
+    const users = await pool.query(`SELECT * FROM users `);
+
+    res.json(users.rows);
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 //signup
 app.post("/signup", async (req, res) => {
