@@ -12,6 +12,10 @@ const jwt = require("jsonwebtoken");
 app.use(cors());
 app.use(express.json());
 
+app.get("/", async (req, res) => {
+  res.send("ứng dụng kết nối thành công ");
+});
+
 //get all todos
 app.get("/todos/:userEmail", async (req, res) => {
   //req.params là lấy tham số trên thanh url
