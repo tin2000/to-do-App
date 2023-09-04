@@ -40,7 +40,7 @@ In this assignment, you will create a basic React.js. You'll apply key React/Nex
 
 # Getting Started with Create React App
 Clone git repository
-### `https://github.com/tin2000/to- do- App.git`
+### `https://github.com/tin2000/to-do-App.git`
 And in the project directory, you can run:
 ### `npm install`
 ### `cd client`
@@ -93,7 +93,7 @@ If you click SIGN OUT, you will return to the login page
 ## Contact
 Nguyen Tin - dangtinanother@gmail.com
 
-Project Link: [https://github.com/tin2000/to- do- App](https://github.com/tin2000/to- do- App)
+Project Link: [https://github.com/tin2000/to-do-App](https://github.com/tin2000/to-do-App)
 
 
 ### Thank You 
