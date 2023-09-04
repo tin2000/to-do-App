@@ -1,0 +1,44 @@
+version: "3"
+services:
+  postgres:
+    image: "postgres:latest"
+    environment:
+      - POSTGRES_PASSWORD=postgres_password
+  nginx:
+    # depends_on tạo container api sau đó là client trước vì client gọi đến  api
+    depends_on:
+      - api
+      - client
+    # Luôn khởi động lại khi xảy ra lỗi hoặc bị stop
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    # lắng nghe port 80 và tạo ra port 3050 ánh xạ qua
+    ports:
+      - "3050:80"
+  api:
+    build:
+      # dockerfile được gán bằng Dockerfile.dev để chạy
+      dockerfile: Dockerfile.dev
+      # context: xác định đường dẫn đến mục docker file
+      context: ./server
+    # Khi config option volume thì mỗi lần stop container data của container đó sẽ không bị mất đi.
+    volumes: # Docker Volume chia sẽ dữ liệu giữa các docker container
+      - /app/node_modules
+      - ./server:/app
+    # cấu hình api đề liên kết cới csdl postgres ở services postgres trên.
+    environment:
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
+  client:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app

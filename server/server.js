@@ -1,4 +1,5 @@
 //toán tử ?? sẽ trả về giá trị đầu tiên nếu nó k là null undefine
+const PORT = process.env.PORT ?? 8080;
 const express = require("express");
 const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
@@ -8,11 +9,12 @@ const pool = require("./db");
 const bcrypt = require("bcrypt");
 //sử jsonwebtoken để đảm bảo tính toàn vẹn dữ liệu
 const jwt = require("jsonwebtoken");
+const HOST = "0.0.0.0";
 //Simple Usage (Enable All CORS Requests)
 app.use(cors());
 app.use(express.json());
 
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
   res.send("ứng dụng kết nối thành công ");
 });
 
@@ -159,5 +161,6 @@ app.post("/login", async (req, res) => {
     console.error(err);
   }
 });
+app.listen(PORT, HOST);
 
-app.listen(process.env.PORT, () => console.log(`Server running on PORT  8000`));
+console.log(`Runnig on http://${HOST}:${PORT}`);

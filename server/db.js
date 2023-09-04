@@ -9,21 +9,32 @@ const { Pool } = require("pg");
 //cú pháp sử dụng:require('dotenv').config();
 require("dotenv").config();
 
-// const pool = new Pool({
-//   user: process.env.USERNAME,
-//   host: process.env.HOST,
-//   database: process.env.DATABASE,
-//   password: process.env.PASSWORD,
-//   port: process.env.DBPORT,
-// });
-
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
 });
 
-pool.connect((err) => {
-  if (err) throw err;
-  console.log("Connect to PostgreSQL successfully");
+// const pool = new Pool({
+//   connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+// });
+
+// pool.connect((err) => {
+//   if (err) throw err;
+//   console.log("Connect to PostgreSQL successfully");
+// });
+pool.on("connect", (client) => {
+  client.query(
+    "CREATE TABLE IF NOT EXISTS users (email VARCHAR(255) PRIMARY KEY, hashed_password VARCHAR(255))"
+  );
+  client
+    .query(
+      "CREATE TABLE IF NOT EXISTS todos ( id VARCHAR(255) PRIMARY KEY,user_email VARCHAR(255),title VARCHAR(30),progress INT,date VARCHAR(300))"
+    )
+
+    .catch((err) => console.log(err));
 });
 
 module.exports = pool;

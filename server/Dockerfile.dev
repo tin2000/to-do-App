@@ -1,0 +1,20 @@
+# Ts thứ 1 là tên , ts 2 là version  
+FROM node:18-alpine
+
+# App directory
+WORKDIR /app
+
+# copy toàn bộ những file package.json vào WORKDIR
+COPY ./package.json ./
+
+# Do project k trống đang sử dụng thư viện express phải gọi lệnh này
+# Để install express lên 
+RUN npm install
+
+# COPY toàn bộ những thứ nằm trong folder first-demo lên WORKDIR
+COPY . .
+
+# sử dụng port này ở trên docker là 8080 của docker
+EXPOSE 8080
+
+CMD ["npm", "run", "start"]
